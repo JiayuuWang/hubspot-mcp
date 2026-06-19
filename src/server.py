@@ -4,6 +4,10 @@ from dedalus_mcp.server import TransportSecuritySettings
 from hubspot import hubspot, hubspot_tools
 
 
+def _disable_auto_output_schemas(server: MCPServer) -> None:
+    server.tools._build_output_schema = lambda _fn: None
+
+
 def create_server() -> MCPServer:
     return MCPServer(
         name="hubspot-mcp",
@@ -16,6 +20,7 @@ def create_server() -> MCPServer:
 
 async def main() -> None:
     server = create_server()
+    _disable_auto_output_schemas(server)
     server.collect(*hubspot_tools)
     await server.serve(port=8080)
 
