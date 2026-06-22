@@ -4,7 +4,7 @@ from dedalus_mcp.auth import Connection, SecretKeys
 _BASE_URL = "https://api.hubapi.com"
 
 hubspot = Connection(
-    name="JiayuWang-hubspot-mcp",
+    name="hubspot",
     secrets=SecretKeys(token="HUBSPOT_ACCESS_TOKEN"),
     base_url=_BASE_URL,
     auth_header_format="Bearer {api_key}",
