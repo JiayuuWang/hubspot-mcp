@@ -31,6 +31,14 @@ load_dotenv()
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__)))
 from hubspot import hubspot  # noqa: E402
+from dedalus_mcp.auth import Connection as _Conn
+from dedalus_labs.lib.mcp.request import slug_to_connection_name as _s2c
+
+
+def _rebind(conn, slug):
+    return _Conn(name=_s2c(slug), secrets=conn.secrets, base_url=conn.base_url,
+                 auth_header_name=conn.auth_header_name, auth_header_format=conn.auth_header_format)
+
 
 DEDALUS_API_KEY = os.getenv("DEDALUS_API_KEY", "")
 DEDALUS_API_URL = os.getenv("DEDALUS_API_URL", "https://api.dedaluslabs.ai")
@@ -105,7 +113,7 @@ async def main() -> int:
     from dedalus_labs import AsyncDedalus, DedalusRunner
     from dedalus_mcp.auth import SecretValues
 
-    creds = [SecretValues(hubspot, token=HUBSPOT_ACCESS_TOKEN)]
+    creds = [SecretValues(_rebind(hubspot, MCP_SERVER_SLUG), token=HUBSPOT_ACCESS_TOKEN)]
 
     client = AsyncDedalus(
         api_key=DEDALUS_API_KEY,
