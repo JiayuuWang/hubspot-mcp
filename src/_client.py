@@ -44,7 +44,7 @@ DEDALUS_API_KEY = os.getenv("DEDALUS_API_KEY", "")
 DEDALUS_API_URL = os.getenv("DEDALUS_API_URL", "https://api.dedaluslabs.ai")
 DEDALUS_AS_URL = os.getenv("DEDALUS_AS_URL", "https://as.dedaluslabs.ai")
 HUBSPOT_ACCESS_TOKEN = os.getenv("HUBSPOT_ACCESS_TOKEN", "")
-MCP_SERVER_SLUG = os.getenv("MCP_SERVER_SLUG", "JiayuWang(王嘉宇)/hubspot-mcp")
+MCP_SERVER_SLUG = os.getenv("MCP_SERVER_SLUG", "JiayuWang/hubspot-mcp")
 MODEL = os.getenv("DEDALUS_TEST_MODEL", "anthropic/claude-sonnet-4-5")
 
 REQUIRED_TOOLS = [
